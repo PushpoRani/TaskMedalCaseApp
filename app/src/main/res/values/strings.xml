@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Medal Case App</string>
+
+    <string name="achievements">Achievements</string>
+    <string name="home">Home</string>
+    <string name="welcome_to_medal_case_App">Welcome To Medal Case App</string>
+</resources>
