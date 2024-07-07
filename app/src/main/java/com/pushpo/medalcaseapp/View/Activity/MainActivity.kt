@@ -8,8 +8,8 @@ import androidx.core.view.ViewCompat
 import androidx.core.view.WindowInsetsCompat
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentActivity
+import com.pushpo.medalcaseapp.Fragment.FragmentHome
 import com.pushpo.medalcaseapp.R
-import com.pushpo.medalcaseapp.View.Fragment.FragmentAchievements
 
 class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
@@ -22,7 +22,7 @@ class MainActivity : AppCompatActivity() {
             insets
         }
 
-        setCurrentFragment(FragmentAchievements(), this@MainActivity)
+        setCurrentFragment(FragmentHome(), this@MainActivity, false)
     }
 
     companion object {
@@ -31,12 +31,15 @@ class MainActivity : AppCompatActivity() {
          * @param fragment
          * @param activity
          */
-        fun setCurrentFragment(fragment: Fragment?, activity: Activity) {
+        fun setCurrentFragment(fragment: Fragment?, activity: Activity, isBackStacked: Boolean) {
             val fragmentManager = (activity as FragmentActivity).supportFragmentManager
             val fragmentTransaction = fragmentManager.beginTransaction()
             fragmentTransaction.replace(R.id.fragmentLayout, fragment!!)
+            if (isBackStacked) fragmentTransaction.addToBackStack(null)
             fragmentTransaction.commit()
             fragmentManager.executePendingTransactions()
         }
     }
+
+
 }

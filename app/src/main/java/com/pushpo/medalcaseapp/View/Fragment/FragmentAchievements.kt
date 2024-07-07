@@ -1,10 +1,13 @@
 package com.pushpo.medalcaseapp.View.Fragment
 
+import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.fragment.app.Fragment
+import androidx.fragment.app.FragmentManager
 import com.pushpo.medalcaseapp.Model.AchievementsItem
 import com.pushpo.medalcaseapp.Model.Medal_Items
 import com.pushpo.medalcaseapp.R
@@ -20,6 +23,7 @@ class FragmentAchievements : Fragment(){
     private var arraylistAchievements = ArrayList<AchievementsItem>()
     private var _binding: FragmentAchievementsBinding? = null
     private val binding get() = _binding!!
+    private var callback : OnBackPressedCallback? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +43,7 @@ class FragmentAchievements : Fragment(){
         super.onViewCreated(view, savedInstanceState)
 
         binding.backImg.setOnClickListener {
-
+            requireActivity().onBackPressedDispatcher.onBackPressed()
         }
         setAchievementItems()
     }
@@ -81,5 +85,21 @@ class FragmentAchievements : Fragment(){
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onAttach(context: Context) {
+        super.onAttach(context)
+        /**
+         * Callback Listener for back pressed condition handle throw fragments
+         */
+        callback = object : OnBackPressedCallback(
+            true // default to enabled
+        ) {
+            override fun handleOnBackPressed() {
+                val fm: FragmentManager = requireActivity().supportFragmentManager
+                fm.popBackStack()
+            }
+        }
+        requireActivity().onBackPressedDispatcher.addCallback(this, callback!!)
     }
 }
