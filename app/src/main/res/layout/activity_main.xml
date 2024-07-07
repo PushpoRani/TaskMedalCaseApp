@@ -6,14 +6,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".View.Activity.MainActivity">
-    <com.google.android.material.appbar.AppBarLayout
+
+    <com.google.android.material.appbar.MaterialToolbar
         android:layout_width="match_parent"
         android:layout_height="?actionBarSize"
-        android:background="@color/color_primary"
-        android:fitsSystemWindows="true">
+        android:background="@color/color_primary">
 
-    </com.google.android.material.appbar.AppBarLayout>
-
+    </com.google.android.material.appbar.MaterialToolbar>
     <FrameLayout
         android:id="@+id/fragmentLayout"
         android:layout_width="match_parent"
